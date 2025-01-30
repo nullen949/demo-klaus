@@ -1,5 +1,6 @@
 package com.demo.kafka.config;
 
+import com.demo.kafka.constant.KafkaDemoConstant;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -13,7 +14,6 @@ import org.springframework.kafka.config.KafkaListenerContainerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.listener.ContainerProperties;
 
 import java.util.HashMap;
@@ -22,12 +22,15 @@ import java.util.Map;
 /**
  * 卡夫卡配置
  *
- * @author klaus
+ * @author Nullen
  * @date 2024/05/31
  */
 @Configuration
 public class KafkaConfiguration {
 
+    /**
+     * Kafka服务地址, 多个使用","隔开
+     */
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;
 
@@ -39,6 +42,12 @@ public class KafkaConfiguration {
 
     @Value("${spring.kafka.producer.buffer-memory}")
     private Integer bufferMemory;
+
+    /**
+     * 消息延迟的毫秒值
+     */
+    @Value("${spring.kafka.producer.properties.linger.ms}")
+    private Integer lingerMs;
 
     @Value("${spring.kafka.consumer.group-id}")
     private String groupId;
@@ -63,10 +72,10 @@ public class KafkaConfiguration {
      *
      * @return {@link NewTopic }
      */
-    @Bean
-    public NewTopic initialTopic() {
-        return new NewTopic("topic_test", 3, (short) 2);
-    }
+    // @Bean
+    // public NewTopic initialTopic() {
+    //     return new NewTopic("topic_test", 3, (short) 2);
+    // }
 
 
     /**
@@ -75,45 +84,10 @@ public class KafkaConfiguration {
      *
      * @return {@link NewTopic }
      */
-    @Bean
-    public NewTopic updateTopic() {
-        return new NewTopic("topic_test_batch", 10, (short) 2);
-    }
-
-
-    /**
-     * 生产者配置信息
-     */
-    @Bean
-    public Map<String, Object> producerConfigs() {
-        Map<String, Object> props = new HashMap<>();
-        props.put(ProducerConfig.ACKS_CONFIG, "0");
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        props.put(ProducerConfig.RETRIES_CONFIG, retries);
-        props.put(ProducerConfig.BATCH_SIZE_CONFIG, batchSize);
-        props.put(ProducerConfig.LINGER_MS_CONFIG, 1);
-        props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
-        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        return props;
-    }
-
-    /**
-     * 生产者工厂
-     */
-    @Bean
-    public ProducerFactory<String, String> producerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfigs());
-    }
-
-    /**
-     * 生产者模板
-     */
-    @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
-    }
-
+    // @Bean
+    // public NewTopic updateTopic() {
+    //     return new NewTopic("topic_test_batch", 10, (short) 2);
+    // }
 
     /**
      * 消费者配置信息
@@ -130,13 +104,14 @@ public class KafkaConfiguration {
         props.put(ConsumerConfig.REQUEST_TIMEOUT_MS_CONFIG, 30000);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, autoCommitInterval);
         return props;
     }
 
     /**
      * 消费者批量工厂
      */
-    @Bean
+    @Bean(KafkaDemoConstant.BATCH_FACTORY)
     public KafkaListenerContainerFactory<?> batchFactory() {
         ConcurrentKafkaListenerContainerFactory<Integer, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(new DefaultKafkaConsumerFactory<>(consumerConfigs()));
@@ -148,5 +123,31 @@ public class KafkaConfiguration {
         factory.setBatchListener(true);
         return factory;
     }
+
+
+    /**
+     * 事务消息模板
+     *
+     * @return {@link KafkaTemplate }<{@link String }, {@link String }>
+     */
+    @Bean
+    public KafkaTemplate<String, String> kafkaTemplate() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(ProducerConfig.RETRIES_CONFIG, retries);
+        props.put(ProducerConfig.LINGER_MS_CONFIG, 0);
+        props.put(ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        // 需要开启事务时必须配置, 但开启事务后只能发送事务消息
+        props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "tx_");
+        // 事务模板必须配置acks为all, 否则会报错
+        props.put(ProducerConfig.ACKS_CONFIG, "all");
+        KafkaTemplate<String, String> template = new KafkaTemplate<>(new DefaultKafkaProducerFactory<>(props));
+        // 设置允许发送非事务消息
+        template.setAllowNonTransactional(true);
+        return template;
+    }
+
 
 }

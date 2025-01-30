@@ -3,7 +3,7 @@ package com.demo.rabbitmq.constant;
 /**
  * MQ常量
  *
- * @author Klaus
+ * @author Nullen
  */
 public class MQConstant {
 

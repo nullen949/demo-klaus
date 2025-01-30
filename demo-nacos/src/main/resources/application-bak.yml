@@ -1,7 +1,7 @@
 # application-bak.yml (不能是bootstrap.yml)
 spring:
   application:
-    name: klaus-demo-nacos
+    name: nullen-demo-nacos
   cloud:
     nacos:
       server-addr: localhost:8848
@@ -9,7 +9,7 @@ spring:
       password: nacos
       config:
         group: ${spring.profiles.active}
-        namespace: klaus
+        namespace: nullen
         file-extension: yml
         shared-configs:
           - data-id: common.yml
@@ -17,7 +17,7 @@ spring:
             refresh: true
       discovery:
         group: ${spring.profiles.active}
-        namespace: klaus
+        namespace: nullen
   config:
     import:
       - optional:nacos:common.yml

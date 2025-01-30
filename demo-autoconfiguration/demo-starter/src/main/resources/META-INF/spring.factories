@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.nullen.demo.starter.DemoStarterAutoConfigurationC,\
+com.nullen.demo.starter.DemoStarterAutoConfigurationB,\
+com.nullen.demo.starter.DemoStarterAutoConfigurationA,\
+com.nullen.demo.starter.TestBeanH

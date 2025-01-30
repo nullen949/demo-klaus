@@ -5,14 +5,14 @@ spring:
   profiles:
     active: local
   application:
-    name: klaus-demo-nacos
+    name: nullen-demo-nacos
   cloud:
     nacos:
       server-addr: localhost:8848
       username: nacos
       password: nacos
       config:
-        namespace: klaus
+        namespace: nullen
         group: ${spring.profiles.active}
         # 默认是${spring.application.name}, 这里没写后缀时nacos端后缀可写可不写; 如果这里显示声明了后缀, nacos也一定要加上后缀
 #        name: ${spring.application.name}
@@ -23,14 +23,14 @@ spring:
             group: ${spring.profiles.active}
             refresh: true
       discovery:
-        namespace: klaus
+        namespace: nullen
         group: ${spring.profiles.active}
 ---
 spring:
   profiles:
     active: dev
   application:
-    name: klaus-demo-nacos
+    name: nullen-demo-nacos
   cloud:
     nacos:
       server-addr: localhost:8848
@@ -38,21 +38,21 @@ spring:
       password: nacos
       config:
         group: ${spring.profiles.active}
-        namespace: klaus
+        namespace: nullen
         file-extension: yml
         shared-configs:
           - data-id: common.yml
             group: ${spring.profiles.active}
             refresh: true
       discovery:
-        namespace: klaus
+        namespace: nullen
         group: ${spring.profiles.active}
 ---
 spring:
   profiles:
     active: test
   application:
-    name: klaus-demo-nacos
+    name: nullen-demo-nacos
   cloud:
     nacos:
       server-addr: localhost:8848
@@ -60,12 +60,12 @@ spring:
       password: nacos
       config:
         group: ${spring.profiles.active}
-        namespace: klaus
+        namespace: nullen
         file-extension: yml
         shared-configs:
           - data-id: common.yml
             group: ${spring.profiles.active}
             refresh: true
       discovery:
-        namespace: klaus
+        namespace: nullen
         group: ${spring.profiles.active}

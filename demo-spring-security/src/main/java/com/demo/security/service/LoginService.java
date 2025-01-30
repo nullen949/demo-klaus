@@ -4,7 +4,7 @@ package com.demo.security.service;
 import com.demo.security.entity.User;
 
 /**
- * @author Klaus
+ * @author Nullen
  */
 public interface LoginService {
 

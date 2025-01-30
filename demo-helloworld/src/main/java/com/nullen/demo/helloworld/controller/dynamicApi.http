@@ -1,0 +1,48 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+### get
+GET http://localhost:8081//api/dynamic/get?id=1234
+
+### post-single-dto
+POST http://localhost:8081//api/dynamic/post-single-dto
+Content-Type: application/json
+
+{
+  "name": "Nullen"
+}
+
+### post-str-list
+POST http://localhost:8081//api/dynamic/post-str-list
+Content-Type: application/json
+
+[
+  "aaa", "bbbb", "ccccc"
+]
+
+### post-dto-list
+POST http://localhost:8081//api/dynamic/post-dto-list
+Content-Type: application/json
+
+[
+  {
+    "name": "Silas"
+  },
+  {
+    "name": "nullen"
+  }
+]
+
+### post-test-entity
+POST http://localhost:8081//api/dynamic/post-test-entity
+Content-Type: application/json
+
+[
+  {
+    "name": "Silas"
+  },
+  {
+    "name": "nullen"
+  }
+]

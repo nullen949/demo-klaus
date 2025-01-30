@@ -1,9 +1,9 @@
 package com.demo.redis.test;
 
 import cn.hutool.core.date.StopWatch;
-import com.klaus.demo.redis.RedisDemoApplication;
-import com.klaus.fd.util.RedisUtil;
-import com.klaus.fd.utils.JsonUtil;
+import com.nullen.demo.redis.RedisDemoApplication;
+import com.nullen.fd.util.RedisUtil;
+import com.nullen.fd.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Klaus
+ * @author Nullen
  */
 @Slf4j
 @SpringBootTest(classes = RedisDemoApplication.class)
@@ -32,14 +32,14 @@ public class RedisUtilTest {
     @Test
     void testStr() {
         String key = "name";
-        RedisUtil.set(key, "klaus", Duration.ofSeconds(30));
+        RedisUtil.set(key, "klnullenaus", Duration.ofSeconds(30));
         System.out.println(RedisUtil.get(key));
     }
 
     @Test
     void testList() {
         String key = "nameList";
-        RedisUtil.setList(key, Arrays.asList("Wynn", "Alvaro", "Silas", "Damon", "Klaus"));
+        RedisUtil.setList(key, Arrays.asList("Wynn", "Alvaro", "Silas", "Damon", "Klaus", "Nullen"));
         List<String> list = RedisUtil.getStrList(key);
         log.info("{}", JsonUtil.toJsonStr(list));
         RedisUtil.del(key);

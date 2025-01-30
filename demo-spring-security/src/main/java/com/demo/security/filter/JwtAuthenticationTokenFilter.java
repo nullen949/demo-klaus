@@ -2,9 +2,9 @@ package com.demo.security.filter;
 
 import com.demo.security.constants.RedisKey;
 import com.demo.security.entity.LoginUser;
-import com.fd.auth.constant.AuthConstant;
-import com.fd.auth.util.JwtUtil;
-import com.klaus.fd.util.RedisCache;
+import com.nullen.fd.auth.constant.AuthConstant;
+import com.nullen.fd.auth.util.JwtUtil;
+import com.nullen.fd.util.RedisUtil;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -22,7 +22,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * @author Klaus
+ * @author Nullen
  * 在Spring中, 建议通过继承OncePerRequestFilter来创建过滤器(只会执行一次, 避免在内部重定向时多次执行), 而非实现原生的Filter来创建过滤器
  */
 @Slf4j
@@ -51,7 +51,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         }
 
         // 从redis中获取用户信息
-        LoginUser loginUser = RedisCache.hGet(String.format(RedisKey.JWT_TOKEN, userid), LoginUser.class);
+        LoginUser loginUser = RedisUtil.get(String.format(RedisKey.JWT_TOKEN, userid), LoginUser.class);
         if (Objects.isNull(loginUser)) {
             throw new AuthenticationServiceException("Please login!");
         }

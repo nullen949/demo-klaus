@@ -23,7 +23,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 /**
  * 通过@EnableWebSecurity的形式配置SpringSecurity
  *
- * @author Klaus
+ * @author Nullen
  */
 // @EnableWebSecurity
 public class SecurityConfig {

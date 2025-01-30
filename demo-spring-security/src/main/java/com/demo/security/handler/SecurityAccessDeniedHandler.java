@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Klaus
+ * @author Nullen
  */
 @Configuration
 public class SecurityAccessDeniedHandler implements AccessDeniedHandler {

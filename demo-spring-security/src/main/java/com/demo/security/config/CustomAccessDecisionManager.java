@@ -1,6 +1,6 @@
 package com.demo.security.config;
 
-import com.klaus.demo.comm.anno.NoAuthRequired;
+import com.nullen.demo.comm.anno.NoAuthRequired;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.ConfigAttribute;

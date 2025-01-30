@@ -1,7 +1,7 @@
 package com.demo.security.vo;
 
 
-import com.klaus.demo.comm.entity.BaseEntity;
+import com.nullen.demo.comm.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;

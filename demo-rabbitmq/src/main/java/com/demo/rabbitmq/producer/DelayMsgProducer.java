@@ -1,13 +1,13 @@
 package com.demo.rabbitmq.producer;
 
 import com.demo.rabbitmq.constant.MQConstant;
-import com.klaus.fd.utils.DateUtil;
+import com.nullen.fd.utils.DateUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
 /**
- * @author Klaus
+ * @author Nullen
  */
 @Component
 @RequiredArgsConstructor

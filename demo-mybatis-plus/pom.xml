@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.klaus.demo</groupId>
-        <artifactId>klaus-demo</artifactId>
+        <groupId>com.nullen.demo</groupId>
+        <artifactId>nullen-demo</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>demo-mybatis-plus</artifactId>
@@ -16,11 +16,11 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.klaus.demo</groupId>
+            <groupId>com.nullen.demo</groupId>
             <artifactId>demo-comm</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.klaus.fd</groupId>
+            <groupId>com.nullen.fd</groupId>
             <artifactId>fast-dev-db</artifactId>
         </dependency>
         <dependency>

@@ -10,7 +10,7 @@ import java.nio.channels.FileChannel;
 /**
  * ByteBuffer简介
  *
- * @author Klaus
+ * @author Nullen
  */
 @Slf4j
 public class BufferAndChannelDemo01 {

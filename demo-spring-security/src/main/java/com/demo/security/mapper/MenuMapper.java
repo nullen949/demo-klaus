@@ -8,7 +8,7 @@ import java.util.List;
 
 
 /**
- * @author Klaus
+ * @author Nullen
  */
 @Mapper
 public interface MenuMapper extends BaseMapper<Menu> {

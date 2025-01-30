@@ -2,11 +2,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.klaus.demo</groupId>
-    <artifactId>klaus-demo</artifactId>
+    <groupId>com.nullen.demo</groupId>
+    <artifactId>nullen-demo</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>klaus-demo</name>
-    <description>klaus-demo</description>
+    <name>nullen-demo</name>
+    <description>nullen-demo</description>
     <packaging>pom</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -42,6 +42,9 @@
         <module>demo-mqtt</module>
         <module>demo-tdengine-orm</module>
         <module>demo-kafka</module>
+        <module>demo-iotdb</module>
+        <module>demo-autoconfiguration</module>
+        <module>demo-unit-test</module>
     </modules>
 
     <properties>
@@ -53,7 +56,7 @@
 
         <spring-boot.version>2.5.15</spring-boot.version>
         <fd.version>1.0-SNAPSHOT</fd.version>
-        <klaus-demo.version>1.0-SNAPSHOT</klaus-demo.version>
+        <nullen-demo.version>1.0-SNAPSHOT</nullen-demo.version>
 
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
     </properties>
@@ -61,7 +64,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.klaus.fd</groupId>
+                <groupId>com.nullen.fd</groupId>
                 <artifactId>fast-dev-cache</artifactId>
                 <version>${fd.version}</version>
             </dependency>
@@ -72,13 +75,18 @@
                 <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.klaus.demo</groupId>
-                <artifactId>demo-comm</artifactId>
-                <version>${klaus-demo.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.5.7</version>
             </dependency>
             <dependency>
-                <groupId>com.klaus.tdengineorm</groupId>
-                <artifactId>tdengine-orm-spring-boot-starter</artifactId>
+                <groupId>com.nullen.demo</groupId>
+                <artifactId>demo-comm</artifactId>
+                <version>${nullen-demo.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nullen.tdengineorm</groupId>
+                <artifactId>tdengine-orm-boot-starter</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -97,7 +105,7 @@
 
             <!-- 当前项目模块 -->
             <dependency>
-                <groupId>com.klaus.demo</groupId>
+                <groupId>com.nullen.demo</groupId>
                 <artifactId>demo-spring-security</artifactId>
                 <version>${fd.version}</version>
             </dependency>
@@ -108,44 +116,43 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>com.klaus.fd</groupId>
+                <groupId>com.nullen.fd</groupId>
                 <artifactId>fast-dev-core</artifactId>
                 <version>${fd.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.klaus.fd</groupId>
+                <groupId>com.nullen.fd</groupId>
                 <artifactId>fast-dev-db</artifactId>
                 <version>${fd.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.klaus.fd</groupId>
+                <groupId>com.nullen.fd</groupId>
                 <artifactId>fast-dev-dds</artifactId>
                 <version>${fd.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.klaus.fd</groupId>
+                <groupId>com.nullen.fd</groupId>
                 <artifactId>fast-dev-web</artifactId>
                 <version>${fd.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.klaus.fd</groupId>
+                <groupId>com.nullen.fd</groupId>
                 <artifactId>fast-dev-auth</artifactId>
                 <version>${fd.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.klaus.fd</groupId>
+                <groupId>com.nullen.fd</groupId>
                 <artifactId>fast-dev-mq</artifactId>
                 <version>${fd.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.esotericsoftware</groupId>
+                <artifactId>kryo</artifactId>
+                <version>5.2.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.klaus.demo</groupId>
-            <artifactId>demo-comm</artifactId>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
@@ -162,27 +169,27 @@
     </build>
 
     <repositories>
-        <repository>
-            <id>ali-mvn</id>
-            <url>https://maven.aliyun.com/nexus/content/repositories/central/</url>
-        </repository>
+        <!-- <repository> -->
+        <!--     <id>ali-mvn</id> -->
+        <!--     <url>https://maven.aliyun.com/nexus/content/repositories/central/</url> -->
+        <!-- </repository> -->
 
-        <repository>
-            <id>jitpack.io</id>
-            <url>https://jitpack.io</url>
-        </repository>
+        <!-- <repository> -->
+        <!--     <id>jitpack.io</id> -->
+        <!--     <url>https://jitpack.io</url> -->
+        <!-- </repository> -->
 
-        <repository>
-            <id>local-nexus</id>
-            <url>http://localhost:18081/repository/maven-public/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </releases>
-        </repository>
+        <!-- <repository> -->
+        <!--     <id>local-nexus</id> -->
+        <!--     <url>http://localhost:18081/repository/maven-public/</url> -->
+        <!--     <snapshots> -->
+        <!--         <enabled>true</enabled> -->
+        <!--         <updatePolicy>always</updatePolicy> -->
+        <!--     </snapshots> -->
+        <!--     <releases> -->
+        <!--         <enabled>true</enabled> -->
+        <!--         <updatePolicy>always</updatePolicy> -->
+        <!--     </releases> -->
+        <!-- </repository> -->
     </repositories>
 </project>

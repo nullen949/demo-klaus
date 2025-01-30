@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * @author Klaus
+ * @author Nullen
  */
 @Slf4j
 @Configuration

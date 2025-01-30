@@ -19,7 +19,7 @@ import java.io.IOException;
  * 异步POST请求消费
  * (使用MQ时为了方便失败重试)
  *
- * @author Klaus
+ * @author Nullen
  */
 @Slf4j
 @Component

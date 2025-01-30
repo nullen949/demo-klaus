@@ -1,7 +1,7 @@
 package com.demo.rabbitmq.consumer;
 
 import com.demo.rabbitmq.constant.MQConstant;
-import com.klaus.fd.utils.DateUtil;
+import com.nullen.fd.utils.DateUtil;
 import com.rabbitmq.client.Channel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * 使用RabbitMQ的延时队列, 需要安装rabbitmq_delayed_message_exchange插件
  *
- * @author Klaus
+ * @author Nullen
  */
 @Slf4j
 @Component

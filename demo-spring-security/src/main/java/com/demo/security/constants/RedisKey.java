@@ -1,7 +1,7 @@
 package com.demo.security.constants;
 
 /**
- * @author Klaus
+ * @author Nullen
  */
 public final class RedisKey {
 
